@@ -86,4 +86,7 @@ offset_bottom = 49.0
 grow_horizontal = 2
 text = "Left Click to Draw | Space to count filled in pixels"
 
+[node name="OmniLight3D" type="OmniLight3D" parent="Extras"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68523, 0)
+
 [connection signal="value_changed" from="Extras/CanvasLayer/brush_size_slider" to="Extras" method="_on_brush_size_slider_value_changed"]
