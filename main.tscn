@@ -9,7 +9,7 @@
 size = Vector2(4, 4)
 
 [sub_resource type="Gradient" id="Gradient_wmxi0"]
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+colors = PackedColorArray(0.333426, 0.143939, 7.21961e-08, 1, 0.333333, 0.145098, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_vq3mp"]
 gradient = SubResource("Gradient_wmxi0")
