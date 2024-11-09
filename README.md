@@ -18,3 +18,6 @@ You will have to modify how collision is handled most likely for your game.
 I also added a way to calculate how much of the dirt has been cleaned. 
 
 ![dirt_cleaning_shader](https://github.com/user-attachments/assets/b097788d-d80f-4e01-bdf2-09a1ea3df652)
+
+Video of it working on YouTube:
+https://youtu.be/Ll0pvsJwGoE
