@@ -1,6 +1,8 @@
 
 # Godot Dirt Cleaning Effect Shader
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/R6R115WI4Z)
+
 Hey everyone.
 
 This shader simulates cleaning a surface of a plane for a "Dirt Cleaning" effect. 
