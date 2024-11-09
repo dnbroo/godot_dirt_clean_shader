@@ -1,0 +1,89 @@
+[gd_scene load_steps=10 format=3 uid="uid://r0ii8qyaqxc0"]
+
+[ext_resource type="Shader" path="res://dirt_clean_shader.gdshader" id="1_8iqvb"]
+[ext_resource type="Texture2D" uid="uid://c2bo6gocawcde" path="res://icon.svg" id="2_1rvyn"]
+[ext_resource type="Script" path="res://dirt_clean_script.gd" id="3_ufgpm"]
+[ext_resource type="Script" path="res://extras.gd" id="4_cnje0"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_n00mf"]
+size = Vector2(4, 4)
+
+[sub_resource type="Gradient" id="Gradient_wmxi0"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vq3mp"]
+gradient = SubResource("Gradient_wmxi0")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hsbiv"]
+render_priority = 0
+shader = ExtResource("1_8iqvb")
+shader_parameter/dirt_strength = 1.0
+shader_parameter/clean_texture = ExtResource("2_1rvyn")
+shader_parameter/dirty_texture = SubResource("GradientTexture2D_vq3mp")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_enhsg"]
+data = PackedVector3Array(2, 0, 2, -2, 0, 2, 2, 0, -2, -2, 0, 2, -2, 0, -2, 2, 0, -2)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="NeededForShader" type="Node" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NeededForShader"]
+mesh = SubResource("PlaneMesh_n00mf")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_hsbiv")
+script = ExtResource("3_ufgpm")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NeededForShader/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NeededForShader/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_enhsg")
+
+[node name="Camera3D" type="Camera3D" parent="NeededForShader"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.99841, 0)
+
+[node name="Extras" type="Node" parent="."]
+script = ExtResource("4_cnje0")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Extras"]
+
+[node name="dirt_mask_label" type="Label" parent="Extras/CanvasLayer"]
+offset_right = 77.0
+offset_bottom = 23.0
+text = "dirt_mask"
+
+[node name="dirt_mask_texture" type="TextureRect" parent="Extras/CanvasLayer"]
+offset_top = 27.0
+offset_right = 318.0
+offset_bottom = 356.0
+texture = ExtResource("2_1rvyn")
+expand_mode = 1
+
+[node name="brush_radius" type="Label" parent="Extras/CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 101.0
+grow_vertical = 0
+text = "brush_radius"
+
+[node name="brush_size_slider" type="VSlider" parent="Extras/CanvasLayer"]
+offset_left = 24.0
+offset_top = 427.0
+offset_right = 62.0
+offset_bottom = 677.0
+min_value = 1.0
+value = 20.0
+
+[node name="instructions" type="Label" parent="Extras/CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -188.5
+offset_right = 188.5
+offset_bottom = 49.0
+grow_horizontal = 2
+text = "Left Click to Draw | Space to count filled in pixels"
+
+[connection signal="value_changed" from="Extras/CanvasLayer/brush_size_slider" to="Extras" method="_on_brush_size_slider_value_changed"]
